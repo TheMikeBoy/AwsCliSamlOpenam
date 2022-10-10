@@ -218,7 +218,6 @@ func returnrole(data []byte) (string, string) {
 	}
 	println("Set you Role: ")
 	fmt.Scan(&rolechoose)
-	//rolechoose = 5
 
 	return strings.Split(Rolesmap[rolechoose], ",")[0], strings.Split(Rolesmap[rolechoose], ",")[1]
 
@@ -271,7 +270,7 @@ func main() {
 		fmt.Println("File Created")
 	} else if operationSystem == "windows" {
 
-		err, out, errout := gosh.PowershellOutput(`AssumeRole`)
+		err, out, errout := gosh.PowershellOutput(AssumeRole)
 
 		if err != nil {
 			log.Printf("error: %v\n", err)
@@ -284,7 +283,9 @@ func main() {
 		if err1 != nil {
 			fmt.Printf("Unable to write file: %v", err1)
 		}
-		fmt.Println("File Created")
+		if err1 == nil {
+			fmt.Println("File Created")
+		}
 
 	} else {
 		fmt.Println("Operation System Not Supported")
